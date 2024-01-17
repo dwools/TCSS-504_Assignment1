@@ -1,5 +1,5 @@
 
-
+# Render the minesweeper solution into OOP program to call it in the unit tests
 class Minesweeper():
     """
     The code below reads the input file ("input_file") line by line and writes an output file ("output_file") containing the minesweeper clues for each field.
