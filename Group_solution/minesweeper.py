@@ -14,9 +14,10 @@ class Minesweeper():
         7) Update the "output" string with each Field # and with each "minefield" string.
     """
 
-    def __init__(self, input_file, output_file):
+    def __init__(self, input_file):
         self.input_file = input_file
-        self.output_file = output_file
+        self.output_file = open(f"{self.input_file}_output.txt", "w")
+        self.input_file = open(f"{self.input_file}.txt", "r")
 
     def solve(self):
         line = self.input_file.readline().strip('\n') # Prime the first line, and define "line" for our while loop.
@@ -32,14 +33,14 @@ class Minesweeper():
             length = int(length)
             if lines == 0:                   # The final line is "0 0". Only the final row has a 0 in it. Thus, this is our termination condition.
                 break                       # Stop code when we get to the final line, which reads "0 0"
-            line = input_file.readline().strip('\n') # This reads in the first field line.
+            line = self.input_file.readline().strip('\n') # This reads in the first field line.
 
 
             ### Here, we render each field as an n x m list of lists called "field", whereby n = lines, m = length.
             for i in range(lines):          # "lines" acquired in line 27 and 28.
                 line_list = list(line)      # Append each character in a line to a list called "line_list"
                 field.append(line_list)     # Append each line_list to a list called "field".
-                line = input_file.readline().strip('\n') # Read in the next line to iterate.
+                line = self.input_file.readline().strip('\n') # Read in the next line to iterate.
 
             ### Here, we iterate over our field (defined in line 38 and specified as our subject of iteration in line 81) to lay down the number of bombs adjacent to each cell and assemble our "row" string.
             # North neighbor: field[i-1][j]
@@ -76,20 +77,27 @@ class Minesweeper():
             field_number += 1           # Here we update our field number (defined in line 56) to be used in the "Field #" header above each field in our output.
             output += (f"Field #{str(field_number)}:\n" # Here we update our "output" string with our "Field #" header (defined in line 56 and updated in line 101) and with our above assembled "minefield" string.
                        f"{str(minefield)}\n")
+        self.output_file.write(f"{output}")
+        self.input_file.close()
+        self.output_file.close()
+
+
 # print(output)
 
 # input_file = open('mines_simple.txt', 'r')
 
 if __name__ == '__main__':
-    unittest.main()
+    minesweeper = Minesweeper("test_edge_input")
+    minesweeper.solve()
 
 
 
-    input_file = open('mines.txt', 'r')
-    output_file = open('minesweeper_output.txt', 'w')
+    #
+    # input_file = open('mines.txt', 'r')
+    # output_file = open('minesweeper_output.txt', 'w')
 
-
-    output_file.write(f"{output}")
-    input_file.close()
-    output_file.close()
+    #
+    # output_file.write(f"{output}")
+    # input_file.close()
+    # output_file.close()
 
