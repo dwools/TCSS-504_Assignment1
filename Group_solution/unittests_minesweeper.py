@@ -1,5 +1,5 @@
 import unittest
-import minesweeper
+from minesweeper import Minesweeper
 
 ### Make the minesweeper
 class MyTestCase(unittest.TestCase):
@@ -12,8 +12,8 @@ Include tests that validate your hint producing code/function/method.
 Include tests that validate output for a given minefield is formatted properly.
 Be sure and name your test methods so they describe the test.
 """
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+    # def test_something(self):
+    #     self.assertEqual(True, False)  # add assertion here
 
     def test_row_read(self):
         """Test to ensure rows are read in properly"""
@@ -23,11 +23,29 @@ Be sure and name your test methods so they describe the test.
         """Test to ensure columns are read in properly"""
         pass
 
-    def test_minimum(self):
+    def test_minimum_empty(self):
+        """Test solution for ensure a 1x1 bombless minefield returns a 1x1 minefield with """
+        minimum_empty_solution = open("test_minimum_empty_solution.txt", "r")
+        self.solution = ''
+        self.line = minimum_empty_solution.readline().strip('\n')
+        self.solution += f'{self.line}\n'
+        while self.line:
+            if self.line == '\n':
+                break
+            else:
+                self.line = minimum_empty_solution.readline().strip('\n')
+                self.solution += f"{self.line}\n"
+
+        minimum_empty_test = Minesweeper("test_minimum_empty")
+        self.assertEqual(minimum_empty_test.output, self.solution, "Solutions aren't equal")
+        minimum_empty_solution.close()
+
+    def test_minimum_bomb(self):
         pass
 
     def test_bomb_counts(self):
         """Test to ensure clues for every possible quantity and position of neighboring bombs are lain properly."""
+        pass
 
     def test_maximum(self):
 
