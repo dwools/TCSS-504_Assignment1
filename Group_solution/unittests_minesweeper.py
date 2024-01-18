@@ -45,7 +45,20 @@ Be sure and name your test methods so they describe the test.
 
     def test_bomb_counts(self):
         """Test to ensure clues for every possible quantity and position of neighboring bombs are lain properly."""
-        pass
+        minimum_empty_solution = open("test_minimum_empty_solution.txt", "r")
+        self.solution = ''
+        self.line = minimum_empty_solution.readline().strip('\n')
+        self.solution += f'{self.line}\n'
+        while self.line:
+            if self.line == '\n':
+                break
+            else:
+                self.line = minimum_empty_solution.readline().strip('\n')
+                self.solution += f"{self.line}\n"
+
+        minimum_empty_test = Minesweeper("test_bomb_count")
+        self.assertEqual(minimum_empty_test.output, self.solution, "Solutions aren't equal")
+        minimum_empty_solution.close()
 
     def test_maximum(self):
 

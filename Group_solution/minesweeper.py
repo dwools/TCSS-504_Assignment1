@@ -1,6 +1,6 @@
-
+from input_generator import MineGenerator
 # Render the minesweeper solution into OOP program to call it in the unit tests
-class Minesweeper():
+class MinesweeperSolver():
     """
     The code below reads the input file ("input_file") line by line and writes an output file ("output_file") containing the minesweeper clues for each field.
     Our output_file consists of a string called "output". Our "output" string consists of "minefield" strings, which consist of "row" strings. Each "row" is a string of bombs and clues.
@@ -13,14 +13,15 @@ class Minesweeper():
         6) Update the "minefield" string with each "row" string.
         7) Update the "output" string with each Field # and with each "minefield" string.
     """
-
     def __init__(self, input_file):
+        MineGenerator().run()
         self.input_file = input_file
-        self.output_file = open(f"{self.input_file}_output.txt", "w")
+        self.solution_file = open(f"{self.input_file}_output.txt", "w")
         self.input_file = open(f"{self.input_file}.txt", "r")
+        # self.generate_and_solve()
 
 
-
+    # def solve(self):
         self.line = self.input_file.readline().strip('\n') # Prime the first line, and define "line" for our while loop.
         self.output = ''         # Our output is a string of "minefield" strings, which consist of "row" strings. Each row is a string of bombs and clues. We prime our output string here.
         self.field_number = 0    # Our output string also contains "Field #" headers. We prime this here.
@@ -78,19 +79,27 @@ class Minesweeper():
             self.field_number += 1           # Here we update our field number (defined in line 56) to be used in the "Field #" header above each field in our output.
             self.output += (f"Field #{str(self.field_number)}:\n{str(self.minefield)}\n") # Here we update our "output" string with our "Field #" header (defined in line 56 and updated in line 101) and with our above assembled "minefield" string.
         # print(self.output)
-        self.output_file.write(f"{self.output}")
+        self.solution_file.write(f"{self.output}")
         self.input_file.close()
-        self.output_file.close()
+        self.solution_file.close()
 
     def __str__(self):
         return self.output
+    
+    # def generate_and_solve(self):
+    #     self.MineGenerator.run()
+    #     self.solve()
 # print(output)
 
 # input_file = open('mines_simple.txt', 'r')
 
 if __name__ == '__main__':
-    test_minimum_empty = Minesweeper("test_minimum_empty")
-    # test_bomb_count = Minesweeper("test_bomb_count_input")
+    # test_minimum_empty = Minesweeper("test_minimum_empty")
+    # test_bomb_count = Minesweeper("test_bomb_count_inputn()
+    # file = MineGenerator()
+    # file.run()
+
+    MinesweeperSolver("mines")
 
 
 
