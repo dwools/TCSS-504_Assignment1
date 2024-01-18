@@ -3,26 +3,27 @@ import random
 
 class MineGenerator:
 
-    def __init__(self, bomb_odds = 5):
+    def __init__(self, bomb_odds=5, row_count=None, col_count=None):
         self.bomb_odds = bomb_odds
-        self.output_file = open('mines.txt', 'w')
+        self.row_count = row_count
+        self.col_count = col_count
+        self.output_file = open('minesweeper_input.txt', 'w')
 
     def field_generator(self):
+        if self.row_count or self.col_count is None:
+            self.row_count = random.randint(1, 100)
+            self.col_count = random.randint(1, 100)
 
-        row_count = random.randint(1, 10)
-        col_count = random.randint(1, 10)
-
-        self.output_file.write(f"{row_count} {col_count}\n")
+        self.output_file.write(f"{self.row_count} {self.col_count}\n")
 
         minefield = ''
-        for i in range(row_count):
+        for i in range(self.row_count):
             row = ''
-            for j in range(col_count):
+            for j in range(self.col_count):
                 if random.randint(1, int(self.bomb_odds)) == 1:
                     row += "*"
                 else:
                     row += "."
-                # row += random.choice('...*')
             minefield += f'{row}\n'
         self.output_file.write(minefield)
 
@@ -37,4 +38,3 @@ class MineGenerator:
 if __name__ == "__main__":
     file = MineGenerator()
     file.run()
-
