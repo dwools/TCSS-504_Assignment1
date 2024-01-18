@@ -11,12 +11,10 @@ class MineGenerator:
         self.output_file = open('minesweeper_input.txt', 'w')
 
     def field_generator(self):
-        if self.row_count or self.col_count is not None:
-            self.output_file.write(f"{self.row_count} {self.col_count}\n")
-        else:
+        if self.row_count or self.col_count is None:
             self.row_count = random.randint(1, 100)
             self.col_count = random.randint(1, 100)
-            self.output_file.write(f"{self.row_count} {self.col_count}\n")
+        self.output_file.write(f"{self.row_count} {self.col_count}\n")
 
 
         minefield = ''
@@ -42,5 +40,5 @@ class MineGenerator:
 
 
 if __name__ == "__main__":
-    file = MineGenerator(2,2,1,3)
+    file = MineGenerator(2, 3, 3, 3)
     file.run()
