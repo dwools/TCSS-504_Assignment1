@@ -1,5 +1,5 @@
 import unittest
-from minesweeper import Minesweeper
+from minesweeper import MinesweeperSolver
 
 ### Make the minesweeper
 class MyTestCase(unittest.TestCase):
@@ -24,43 +24,51 @@ Be sure and name your test methods so they describe the test.
         pass
 
     def test_minimum_empty(self):
-        """Test solution for ensure a 1x1 bombless minefield returns a 1x1 minefield with """
+        """Test solution for ensure a 1x1 bombless minefield returns a 1x1 minefield with a 1x1 solution whose clue is 0"""
         minimum_empty_solution = open("test_minimum_empty_solution.txt", "r")
         self.solution = ''
-        self.line = minimum_empty_solution.readline().strip('\n')
-        self.solution += f'{self.line}\n'
-        while self.line:
-            if self.line == '\n':
-                break
-            else:
-                self.line = minimum_empty_solution.readline().strip('\n')
-                self.solution += f"{self.line}\n"
+        for line in minimum_empty_solution:
+            self.solution += f"{line}"
 
-        minimum_empty_test = Minesweeper("test_minimum_empty")
-        self.assertEqual(minimum_empty_test.output, self.solution, "Solutions aren't equal")
+        test_minimum_empty = MinesweeperSolver("test_minimum_empty_input")
+        self.assertEqual(test_minimum_empty.output, self.solution, "Solutions aren't equal")
         minimum_empty_solution.close()
 
     def test_minimum_bomb(self):
-        pass
+        """Test solution for ensure a 1x1 minefield minefield containing a single bomb returns a 1x1 solution with a single bomb."""
+        minimum_bomb_solution = open("test_minimum_bomb_solution.txt", "r")
+        self.solution = ''
+        for line in minimum_bomb_solution:
+            self.solution += f"{line}"
+
+        test_minimum_bomb = MinesweeperSolver("test_minimum_bomb_input")
+        self.assertEqual(test_minimum_bomb.output, self.solution, "Solutions aren't equal")
+        minimum_bomb_solution.close()
 
     def test_bomb_counts(self):
-        """Test to ensure clues for every possible quantity and position of neighboring bombs are lain properly."""
-        minimum_empty_solution = open("test_minimum_empty_solution.txt", "r")
+        """Test to ensure clues for every possible quantity and position of neighboring bombs are laid properly."""
+        bomb_counts_solution = open("test_bomb_counts_solution.txt", "r")
         self.solution = ''
-        self.line = minimum_empty_solution.readline().strip('\n')
-        self.solution += f'{self.line}\n'
-        while self.line:
-            if self.line == '\n':
-                break
-            else:
-                self.line = minimum_empty_solution.readline().strip('\n')
-                self.solution += f"{self.line}\n"
+        for line in bomb_counts_solution:
+            self.solution += f'{line}'
 
-        minimum_empty_test = Minesweeper("test_bomb_count")
-        self.assertEqual(minimum_empty_test.output, self.solution, "Solutions aren't equal")
-        minimum_empty_solution.close()
+        test_bomb_counts = MinesweeperSolver("test_bomb_counts_input")
+        self.assertEqual(test_bomb_counts.output, self.solution, "Solutions aren't equal")
+        bomb_counts_solution.close()
+
+    def test_edge(self):
+        edge_solution = open("test_edge_solution.txt", "r")
+        self.solution = ''
+        for line in edge_solution:
+            self.solution += line
+
+        test_edge = MinesweeperSolver("test_edge_input")
+        self.assertEqual(test_edge.output, self.solution, "Solutions aren't equal")
+        edge_solution.close()
+
 
     def test_maximum(self):
+
 
         pass
 

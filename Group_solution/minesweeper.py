@@ -93,22 +93,24 @@ class MinesweeperSolver():
 
 # input_file = open('mines_simple.txt', 'r')
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # test_minimum_empty = Minesweeper("test_minimum_empty")
     # test_bomb_count = Minesweeper("test_bomb_count_inputn()
     # file = MineGenerator()
     # file.run()
 
-    MinesweeperSolver("mines")
+    # print(MinesweeperSolver("test_bomb_counts_input").output)
 
+bomb_counts_solution = open("test_bomb_counts_solution.txt", "r")
+solution = ''
+# line = bomb_counts_solution.readline().strip('\n')
+# solution += f'{line}\n'
+for line in bomb_counts_solution:
+    # if line == "0 0":
+    #     break
+    # else:
+    solution += f"{line}"
+    # line = bomb_counts_solution.readline().strip('\n')
 
-
-    #
-    # input_file = open('mines.txt', 'r')
-    # output_file = open('minesweeper_output.txt', 'w')
-
-    #
-    # output_file.write(f"{output}")
-    # input_file.close()
-    # output_file.close()
+print(solution)
 
