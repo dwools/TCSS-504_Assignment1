@@ -1,3 +1,4 @@
+import random
 import unittest
 from minesweeper import MinesweeperSolver
 

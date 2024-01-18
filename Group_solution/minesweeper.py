@@ -1,4 +1,5 @@
 from input_generator import MineGenerator
+import random
 # Render the minesweeper solution into OOP program to call it in the unit tests
 class MinesweeperSolver():
     """
@@ -101,16 +102,16 @@ class MinesweeperSolver():
 
     # print(MinesweeperSolver("test_bomb_counts_input").output)
 
-bomb_counts_solution = open("test_bomb_counts_solution.txt", "r")
-solution = ''
-# line = bomb_counts_solution.readline().strip('\n')
-# solution += f'{line}\n'
-for line in bomb_counts_solution:
-    # if line == "0 0":
-    #     break
-    # else:
-    solution += f"{line}"
-    # line = bomb_counts_solution.readline().strip('\n')
-
-print(solution)
+# bomb_counts_solution = open("test_bomb_counts_solution.txt", "r")
+# solution = ''
+# # line = bomb_counts_solution.readline().strip('\n')
+# # solution += f'{line}\n'
+# for line in bomb_counts_solution:
+#     # if line == "0 0":
+#     #     break
+#     # else:
+#     solution += f"{line}"
+#     # line = bomb_counts_solution.readline().strip('\n')
+#
+# print(solution)
 
