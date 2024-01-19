@@ -1,6 +1,7 @@
 import random
 import unittest
 from minesweeper import MinesweeperSolver
+from input_generator import MineGenerator
 
 ### Make the minesweeper
 class MyTestCase(unittest.TestCase):
@@ -16,13 +17,47 @@ Be sure and name your test methods so they describe the test.
     # def test_something(self):
     #     self.assertEqual(True, False)  # add assertion here
 
-    def test_row_read(self):
-        """Test to ensure rows are read in properly"""
-        pass
+    def test_rows_columns_read(self):
+        """Test to ensure rows and columns are read in properly during minefield generation and solving"""
+        MineGenerator(5, 10, 20, 1)
+        MinesweeperSolver()
+        test = open("minesweeper_input.txt", "r")
 
-    def test_column_read(self):
-        """Test to ensure columns are read in properly"""
-        pass
+        test_dimensions = test.readline().strip('\n')
+        read_rows, read_columns = test_dimensions.split()
+        print(read_rows, read_columns)
+        test_line = test.readline().strip('\n')
+
+        test_rows = 0
+        for line in test:
+            test_rows += 1
+        test_rows = test_rows-1
+
+        test_columns = 0
+        for character in test_line:
+            test_columns += 1
+
+        self.assertEqual(test_rows, 10, "test_rows should be 10")
+        self.assertEqual(test_columns, 20, "test_columns should be 20")
+
+        test_solution = open('minesweeper_input_output.txt', 'r')
+        test_solution.readline().strip('\n')
+        test_solution_line = test_solution.readline().strip('\n')
+
+        test_solution_rows = 0
+        for line in test_solution:
+            test_solution_rows += 1
+
+
+        test_solution_columns = 0
+        for character in test_solution_line:
+            test_solution_columns += 1
+
+        self.assertEqual(test_solution_rows, 10, "test_solution_rows should be 10")
+        self.assertEqual(test_solution_columns, 20, "test_solution_rows should be 20")
+        self.assertEqual(test_rows, test_solution_rows, "Test and solution rows are different")
+        self.assertEqual(test_columns, test_solution_columns, "Test and solution columns are different")
+
 
     def test_minimum_empty(self):
         """Test solution for ensure a 1x1 bombless minefield returns a 1x1 minefield with a 1x1 solution whose clue is 0"""
@@ -31,20 +66,21 @@ Be sure and name your test methods so they describe the test.
         for line in minimum_empty_solution:
             self.solution += f"{line}"
 
-        test_minimum_empty = MinesweeperSolver("test_minimum_empty_input")
+        MineGenerator(0,1,1,1)
+        test_minimum_empty = MinesweeperSolver()
         self.assertEqual(test_minimum_empty.output, self.solution, "Solutions aren't equal")
-        minimum_empty_solution.close()
 
     def test_minimum_bomb(self):
         """Test solution for ensure a 1x1 minefield minefield containing a single bomb returns a 1x1 solution with a single bomb."""
+
         minimum_bomb_solution = open("test_minimum_bomb_solution.txt", "r")
         self.solution = ''
         for line in minimum_bomb_solution:
             self.solution += f"{line}"
 
-        test_minimum_bomb = MinesweeperSolver("test_minimum_bomb_input")
+        MineGenerator(1, 1, 1, 1)
+        test_minimum_bomb = MinesweeperSolver()
         self.assertEqual(test_minimum_bomb.output, self.solution, "Solutions aren't equal")
-        minimum_bomb_solution.close()
 
     def test_bomb_counts(self):
         """Test to ensure clues for every possible quantity and position of neighboring bombs are laid properly."""
@@ -57,7 +93,8 @@ Be sure and name your test methods so they describe the test.
         self.assertEqual(test_bomb_counts.output, self.solution, "Solutions aren't equal")
         bomb_counts_solution.close()
 
-    def test_edge(self):
+    def test_edges(self):
+        """Test that minefield edges are working properly """
         edge_solution = open("test_edge_solution.txt", "r")
         self.solution = ''
         for line in edge_solution:
@@ -68,15 +105,27 @@ Be sure and name your test methods so they describe the test.
         edge_solution.close()
 
 
-    def test_maximum(self):
+    def test_maximum_empty(self):
+        """Test generation and solving of 10 empty 100x100 minefields"""
+        maximum_empty_solution = open('test_maximum_empty_solution.txt', 'r')
+        self.solution = ''
+        for line in maximum_empty_solution:
+            self.solution += line
 
+        MineGenerator(0,100,100,10)
+        test_maximum_empty = MinesweeperSolver()
+        self.assertEqual(test_maximum_empty.output, self.solution, "Solutions aren't equal")
 
-        pass
+    def test_maximum_bombs(self):
+        """Test generation and solving of 10 full (all bombs) 100x100 minefields"""
+        maximum_bombs_solution = open('test_maximum_bombs_solution.txt', 'r')
+        self.solution = ''
+        for line in maximum_bombs_solution:
+            self.solution += line
 
-
-    def test_random(self):
-        pass
-
+        MineGenerator(1, 100, 100, 10)
+        test_maximum_bombs = MinesweeperSolver()
+        self.assertEqual(test_maximum_bombs.output, self.solution, "Solutions aren't equal")
 
 
 if __name__ == '__main__':

@@ -14,9 +14,10 @@ class MinesweeperSolver():
         6) Update the "minefield" string with each "row" string.
         7) Update the "output" string with each Field # and with each "minefield" string.
     """
-    def __init__(self, input_file):
-        MineGenerator().run()
+    def __init__(self, input_file=None):
         self.input_file = input_file
+        if self.input_file is None:
+            self.input_file = "minesweeper_input"
         self.solution_file = open(f"{self.input_file}_output.txt", "w")
         self.input_file = open(f"{self.input_file}.txt", "r")
         # self.generate_and_solve()
@@ -94,13 +95,9 @@ class MinesweeperSolver():
 
 # input_file = open('mines_simple.txt', 'r')
 
-# if __name__ == '__main__':
-    # test_minimum_empty = Minesweeper("test_minimum_empty")
-    # test_bomb_count = Minesweeper("test_bomb_count_inputn()
-    # file = MineGenerator()
-    # file.run()
-
-    # print(MinesweeperSolver("test_bomb_counts_input").output)
+if __name__ == '__main__':
+    MineGenerator().run()
+    MinesweeperSolver("minesweeper_input")
 
 # bomb_counts_solution = open("test_bomb_counts_solution.txt", "r")
 # solution = ''
