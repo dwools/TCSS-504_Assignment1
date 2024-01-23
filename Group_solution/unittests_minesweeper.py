@@ -78,9 +78,44 @@ Be sure and name your test methods so they describe the test.
         for line in minimum_bomb_solution:
             self.solution += f"{line}"
 
-        MineGenerator(1, 1, 1, 1)
+        MineGenerator(100, 1, 1, 1)
         test_minimum_bomb = MinesweeperSolver()
         self.assertEqual(test_minimum_bomb.output, self.solution, "Solutions aren't equal")
+
+    def test_minimum_0(self):
+        """Test generation and solving of a 0x0 minefield"""
+
+        no_bomb_solution = open("test_0_solution.txt", "r")
+        self.solution = ''
+        for line in no_bomb_solution:
+            self.solution += f"{line}"
+
+        MineGenerator(100, 0, 0, 5)
+        test_0 = MinesweeperSolver()
+        self.assertEqual(test_0.output, self.solution, "Solutions aren't equal")
+
+
+    def test_maximum_empty(self):
+        """Test generation and solving of 10 empty 100x100 minefields"""
+        maximum_empty_solution = open('test_maximum_empty_solution.txt', 'r')
+        self.solution = ''
+        for line in maximum_empty_solution:
+            self.solution += line
+
+        MineGenerator(0,100,100,10)
+        test_maximum_empty = MinesweeperSolver()
+        self.assertEqual(test_maximum_empty.output, self.solution, "Solutions aren't equal")
+
+    def test_maximum_bombs(self):
+        """Test generation and solving of 10 full (all bombs) 100x100 minefields"""
+        maximum_bombs_solution = open('test_maximum_bombs_solution.txt', 'r')
+        self.solution = ''
+        for line in maximum_bombs_solution:
+            self.solution += line
+
+        MineGenerator(100, 100, 100, 10)
+        test_maximum_bombs = MinesweeperSolver()
+        self.assertEqual(test_maximum_bombs.output, self.solution, "Solutions aren't equal")
 
     def test_bomb_counts(self):
         """Test to ensure clues for every possible quantity and position of neighboring bombs are laid properly."""
@@ -105,27 +140,7 @@ Be sure and name your test methods so they describe the test.
         edge_solution.close()
 
 
-    def test_maximum_empty(self):
-        """Test generation and solving of 10 empty 100x100 minefields"""
-        maximum_empty_solution = open('test_maximum_empty_solution.txt', 'r')
-        self.solution = ''
-        for line in maximum_empty_solution:
-            self.solution += line
 
-        MineGenerator(0,100,100,10)
-        test_maximum_empty = MinesweeperSolver()
-        self.assertEqual(test_maximum_empty.output, self.solution, "Solutions aren't equal")
-
-    def test_maximum_bombs(self):
-        """Test generation and solving of 10 full (all bombs) 100x100 minefields"""
-        maximum_bombs_solution = open('test_maximum_bombs_solution.txt', 'r')
-        self.solution = ''
-        for line in maximum_bombs_solution:
-            self.solution += line
-
-        MineGenerator(1, 100, 100, 10)
-        test_maximum_bombs = MinesweeperSolver()
-        self.assertEqual(test_maximum_bombs.output, self.solution, "Solutions aren't equal")
 
 
 if __name__ == '__main__':

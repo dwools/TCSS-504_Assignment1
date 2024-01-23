@@ -96,8 +96,8 @@ class MinesweeperSolver():
 # input_file = open('mines_simple.txt', 'r')
 
 if __name__ == '__main__':
-    MineGenerator().run()
-    MinesweeperSolver("minesweeper_input")
+    MineGenerator(1, 0, 5, 1)
+    MinesweeperSolver()
 
 # bomb_counts_solution = open("test_bomb_counts_solution.txt", "r")
 # solution = ''

@@ -38,22 +38,23 @@ if __name__ == '__main__':
         columns += 1
     print(columns)
 
-    test_solution = open('minesweeper_input_output.txt', 'r')
-    test_solution.readline().strip('\n')
-    test_solution_line = test_solution.readline().strip('\n')
+    # test_solution = open('minesweeper_input_output.txt', 'r')
+    # test_solution.readline().strip('\n')
+    # test_solution_line = test_solution.readline().strip('\n')
+    #
+    # test_solution_rows = 0
+    # for line in test_solution:
+    #     test_solution_rows += 1
+    # print(test_solution_rows)
+    #
+    # test_solution_columns = 0
+    # for character in test_solution_line:
+    #     test_solution_columns += 1
+    # print(test_solution_columns)
 
-    test_solution_rows = 0
-    for line in test_solution:
-        test_solution_rows += 1
-    print(test_solution_rows)
-
-    test_solution_columns = 0
-    for character in test_solution_line:
-        test_solution_columns += 1
-    print(test_solution_columns)
-
-
-
+MineGenerator(100, 0, 0, 1)
+test_0 = MinesweeperSolver()
+print("output:" + test_0.output)
 
 
     # test_solution = open("minesweeper_input_output.txt", "r")
