@@ -1,4 +1,4 @@
-Team Name: 
+
 Team Members: David Woolston, Jackson Davis, Sanya Sinha
 
 David Woolston: 
